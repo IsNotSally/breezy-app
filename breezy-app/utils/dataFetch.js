@@ -3,7 +3,7 @@
 const uri = 'http://localhost:3000';
 
 export async function getData() {
-  const res = await fetch(`${uri}/api/hello`);
+  const res = await fetch(`${uri}/api/invoice`);
   if (!res.ok) {
     throw new Error('failed to fetch data');
   }
@@ -12,7 +12,7 @@ export async function getData() {
 }
 
 export async function getDataById(id) {
-  const res = await fetch(`${uri}/api/${id}`);
+  const res = await fetch(`${uri}/api/invoice/${id}`);
   if (!res.ok) {
     throw new Error('failed to fetch data');
   }
@@ -31,7 +31,7 @@ export async function getInvoiceDataById(id) {
 
 export async function submitData(data) {
   try {
-    const res = await fetch(`${uri}/api/hello`, {
+    const res = await fetch(`${uri}/api`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ export async function submitData(data) {
 
 export async function updateData(id, data) {
   try {
-    const res = await fetch(`${uri}/api/${id}`, {
+    const res = await fetch(`${uri}/api/invoice/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

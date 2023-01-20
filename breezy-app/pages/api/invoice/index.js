@@ -1,5 +1,5 @@
-import connectMongo from '../../utils/connectMongo';
-import Invoice from '../../models/model';
+import connectMongo from '../../../utils/connectMongo';
+import Invoice from '../../../models/model';
 
 export default async function handler(req, res) {
   const { method } = req;
@@ -9,7 +9,6 @@ export default async function handler(req, res) {
     case 'GET':
       try {
         const invoice = await Invoice.find({});
-       
         res.status(200).json(invoice);
       } catch (e) {
         res.status(400).json({ success: false });

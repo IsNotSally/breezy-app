@@ -1,5 +1,5 @@
+
 import { getData } from '../../../utils/dataFetch';
-import React from 'react';
 import '../../../components/displayInvoiceList.css';
 import DisplayInvoiceList from '../../../components/displayInvoiceList';
 

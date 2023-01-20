@@ -1,6 +1,22 @@
 import { Schema, model, models } from 'mongoose';
 
-const invoiceSchema = new Schema({
+interface Invoice {
+  fullName:string,
+  address: string,
+  phoneNumber: string, 
+  email: string,
+  clientFullName: string,
+  clientAddress: string,
+  clientPhoneNumber: number,
+  clientEmail: string,
+  purchaseOrderNumber: number,
+  description: string,
+  rate: number,
+  date: Date,
+  paid: boolean
+}
+
+const invoiceSchema = new Schema<Invoice>({
   fullName: {
     type: String,
     required: false,
@@ -57,6 +73,6 @@ const invoiceSchema = new Schema({
   },
 });
 
-const Invoice = models.Invoice || model('Invoice', invoiceSchema);
+const Invoice = models.Invoice || model<Invoice>('Invoice', invoiceSchema);
 
 export default Invoice;

@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function ClientLayout ({children}) {
+export default function ClientLayout ({children}: {children: React.ReactNode}) {
   return (
     <>
     <section>
