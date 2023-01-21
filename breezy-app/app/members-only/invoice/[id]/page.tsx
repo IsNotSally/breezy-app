@@ -1,16 +1,22 @@
-import { getDataById } from '../../../../utils/dataFetch';
+
 // import DisplayInvoice from '../../../../components/displayInvoice';
 import '../../../../components/displayInvoice.css'
 import React from 'react';
 import Logo from '../../../../public/For Web/png/Black logo - no background.png';
 import Image from 'next/image';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
+import { getDataById } from '../../../../utils/dataFetch';
+import { IInvoice } from '../../../../models/model';
 
-export default async function FetchInvoice({ params }) {
+//this params is from the route(the folder name--invoice/[id])
+export default async function FetchInvoice({ params } : {params: Params}) {
   const id = params.id;
-  const data = await getDataById(id);
+  console.log(id);
+  
+  const data: IInvoice  = await getDataById(id);
   const invoice = data;
 
-  function GetDate(date) {
+  function GetDate(date:any) {
     date = new Date(date);
 
     let month = date.toLocaleString([], {
@@ -23,7 +29,7 @@ export default async function FetchInvoice({ params }) {
     let year = date.toLocaleString([], {
       year: 'numeric',
     });
-
+    
     if (month < 10) {
       month = `0${month}`;
     }
@@ -44,11 +50,11 @@ export default async function FetchInvoice({ params }) {
       <div className='invoice-box'>
         <table cellPadding='0' cellSpacing='0'>
           <tr className='top'>
-            <td colSpan='3'>
+            <td colSpan={3}>
               <table>
                 <tr>
                   <td className='title'>
-                    <Image src={Logo} width={150}></Image>
+                    <Image src={Logo} width={150} alt='logo'></Image>
                   </td>
 
                   <td>
@@ -67,7 +73,7 @@ export default async function FetchInvoice({ params }) {
           </tr>
 
           <tr className='information'>
-            <td colSpan='2'>
+            <td colSpan={2}>
               <table>
                 <tr> 
                   <td>

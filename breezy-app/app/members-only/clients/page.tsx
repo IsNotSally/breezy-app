@@ -5,13 +5,14 @@ import { getData } from '../../../utils/dataFetch';
 
 
 export default async function FetchClients() {
-  const data: [IClient] = await getData();
+  const data = await getData();
+  const client: Array<IClient> = data;
 
   return (
     <>
-      {data.map((data) => (
-        <div key={data._id.toString()}>
-          <DisplayClients key={data._id.toString()} clientData={data} />
+      {client.map((clt) => (
+        <div key={clt._id.toString()}>
+          <DisplayClients key={clt._id.toString()} clientData={clt} />
         </div>
       ))}
     </>
