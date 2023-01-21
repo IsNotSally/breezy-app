@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-interface Invoice {
+export interface IInvoice {
   fullName:string,
   address: string,
   phoneNumber: string, 
@@ -16,7 +16,7 @@ interface Invoice {
   paid: boolean
 }
 
-const invoiceSchema = new Schema<Invoice>({
+const invoiceSchema = new Schema<IInvoice>({
   fullName: {
     type: String,
     required: false,
@@ -73,6 +73,6 @@ const invoiceSchema = new Schema<Invoice>({
   },
 });
 
-const Invoice = models.Invoice || model<Invoice>('Invoice', invoiceSchema);
+const Invoice = model<IInvoice>('Invoice', invoiceSchema);
 
 export default Invoice;

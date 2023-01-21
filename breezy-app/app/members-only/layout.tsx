@@ -17,7 +17,7 @@ import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 import Logout from './logout';
 
-export default function Layout({ children }) {
+export default function Layout({children} : { children : React.ReactNode }) {
   const menus = [
     {
       title: 'Create Invoice',

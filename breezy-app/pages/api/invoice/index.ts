@@ -1,7 +1,8 @@
 import connectMongo from '../../../utils/connectMongo';
 import Invoice from '../../../models/model';
+import { NextApiRequest, NextApiResponse } from 'next/types';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res:NextApiResponse) {
   const { method } = req;
 
   await connectMongo();
@@ -30,7 +31,7 @@ export default async function handler(req, res) {
         res.status(201).json(invoice);
       } catch (e) {
         console.log(e);
-        res.status(400).json();
+        res.status(400).json('Error!');
       }
   }
 }

@@ -11,7 +11,7 @@ export default function UserProfile() {
   if (user) {
     return (
       <div>
-        <img src={user.picture} />
+        <img src={user.picture || ''} alt="user-image"/>
         <h2>{user.nickname}</h2>
         <p>{user.email}</p>
         <a href='/api/auth/logout'>LOGOUT</a>

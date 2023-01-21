@@ -1,30 +1,31 @@
 import { getInvoiceDataById } from '../../../utils/dataFetch';
 import React from 'react';
 import ClientViewInvoice from '../../../components/client-view-invoice';
+import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
-export default async function FetchInvoice({ params }) {
+export default async function FetchInvoice({ params }: {params: Params}) {
   const id = params.id;
   const data = await getInvoiceDataById(id);
   const invoice = data;
 
-  function GetDate(date) {
-    date = new Date(date);
+  function GetDate(date: number) {
+    let fullDate = new Date(date);
 
-    let month = date.toLocaleString([], {
+    let month = fullDate.toLocaleString([], {
       month: 'numeric',
     });
-    let day = date.toLocaleString([], {
+    let day = fullDate.toLocaleString([], {
       day: 'numeric',
     });
 
-    let year = date.toLocaleString([], {
+    let year = fullDate.toLocaleString([], {
       year: 'numeric',
     });
 
-    if (month < 10) {
+    if (Number(month) < 10) {
       month = `0${month}`;
     }
-    if (day < 10) {
+    if (Number(day) < 10) {
       day = `0${day}`;
     }
 

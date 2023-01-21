@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
 export interface IClient {
   _id: mongoose.Types.ObjectId;

@@ -28,8 +28,9 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "next.config.js", "app/layout.jsx"  ],
+    "**/*.tsx",
+    "public"
+, "next.config.js", "app/layout.tsx"  ],
   "exclude": [
     "node_modules"
   ]
