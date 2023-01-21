@@ -9,19 +9,28 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 import { updateData } from '../utils/dataFetch';
+import { IInvoice } from '../models/invoice';
+
+type Props = {
+  invoice: IInvoice,
+  dueDate: string,
+  currentDate: string,
+  amount: number,
+}
 
 export default function ClientViewInvoice({
   invoice,
   dueDate,
   currentDate,
   amount,
-}) {
+}: Props) {
+
   console.log('PDFFffffffff');
   console.log(invoice);
   const [invoiceStatus, setInvoiceStatus] = useState(invoice.paid);
 
-  const updateStatus = async (invoice) => {
-    const newInvoiceStatus = await updateData(invoice._id, invoice);
+  const updateStatus = async (invoice: IInvoice) => {
+    const newInvoiceStatus = await updateData(invoice._id.toString(), invoice);
     setInvoiceStatus(newInvoiceStatus.paid);
   };
 
@@ -51,11 +60,11 @@ export default function ClientViewInvoice({
             <div className="invoice-box">
               <table cellPadding="0" cellSpacing="0">
                 <tr className="top">
-                  <td colSpan="3">
+                  <td colSpan={3}>
                     <table>
                       <tr>
                         <td className="title">
-                          <Image src={Logo} width={150}></Image>
+                          <Image alt='logo' src={Logo} width={150}></Image>
                         </td>
 
                         <td>
@@ -77,7 +86,7 @@ export default function ClientViewInvoice({
                 </tr>
 
                 <tr className="information">
-                  <td colSpan="2">
+                  <td colSpan={3}>
                     <table>
                       <tr>
                         <td>

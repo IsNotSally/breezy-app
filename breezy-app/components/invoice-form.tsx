@@ -11,6 +11,7 @@ import {
   ChakraProvider,
   Input,
 } from '@chakra-ui/react';
+import { IInvoice } from '../models/invoice';
 
 function InvoiceForm() {
   const [fullName, setFullName] = useState('');
@@ -26,16 +27,14 @@ function InvoiceForm() {
   const [rate, setRate] = useState('');
   const [date, setDate] = useState('');
 
-  const [invoiceData, setInvoice] = useState([]);
-
-  const pushInvoice = async (invoice) => {
+  
+  const pushInvoice = async (invoice: IInvoice) => {
     const newInvoice = await submitData(invoice);
-    setInvoice([...invoiceData, newInvoice]);
   };
 
-  function handleSubmit(input) {
-    input.preventDefault();
-    const newInvoiceData = {
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    const newInvoiceData: IInvoice = {
       fullName,
       address,
       phoneNumber,
@@ -46,13 +45,12 @@ function InvoiceForm() {
       clientEmail,
       purchaseOrderNumber,
       description,
-      rate,
+      rate: Number(rate),
       date,
+      paid: false
     };
 
-    console.log(newInvoiceData);
-
-    pushInvoice({ ...newInvoiceData, paid: false });
+    pushInvoice(newInvoiceData);
 
     setFullName('');
     setAddress('');
@@ -105,7 +103,7 @@ function InvoiceForm() {
               <FormControl>
                 <FormLabel>Phone Number</FormLabel>
                 <Input
-                  type='text'
+                  type='number'
                   name='phone-number'
                   value={phoneNumber}
                   placeholder='Insert phone number...'

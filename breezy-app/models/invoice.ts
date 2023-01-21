@@ -1,22 +1,7 @@
-import { Schema, model, models } from 'mongoose';
+import mongoose from '../db/db';
+import IInvoice from '../interfaces/invoice';
 
-export interface IInvoice {
-  fullName:string,
-  address: string,
-  phoneNumber: string, 
-  email: string,
-  clientFullName: string,
-  clientAddress: string,
-  clientPhoneNumber: number,
-  clientEmail: string,
-  purchaseOrderNumber: number,
-  description: string,
-  rate: number,
-  date: Date,
-  paid: boolean
-}
-
-const invoiceSchema = new Schema<IInvoice>({
+const invoiceSchema = new mongoose.Schema<IInvoice>({
   fullName: {
     type: String,
     required: false,
@@ -43,7 +28,7 @@ const invoiceSchema = new Schema<IInvoice>({
     required: false,
   },
   clientPhoneNumber: {
-    type: Number,
+    type: String,
     required: false,
   },
   clientEmail: {
@@ -51,7 +36,7 @@ const invoiceSchema = new Schema<IInvoice>({
     required: false,
   },
   purchaseOrderNumber: {
-    type: Number,
+    type: String,
     required: false,
   },
   description: {
@@ -64,7 +49,7 @@ const invoiceSchema = new Schema<IInvoice>({
   },
 
   date: {
-    type: Date,
+    type: String,
     required: false,
   },
   paid: {
@@ -73,6 +58,6 @@ const invoiceSchema = new Schema<IInvoice>({
   },
 });
 
-const Invoice = model<IInvoice>('Invoice', invoiceSchema);
+const Invoice = mongoose.model<IInvoice>('Invoice', invoiceSchema);
 
 export default Invoice;

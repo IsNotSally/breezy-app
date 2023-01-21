@@ -17,7 +17,7 @@ export default function LandingPage() {
   const [inputValue, setInputValue] = useState('');
 
 
-  function handleSubmit(e) {
+  function handleSubmit(e: any) {
     e.preventDefault();
     router.push(`/pay-invoice/${inputValue}`);
     setInputValue('');

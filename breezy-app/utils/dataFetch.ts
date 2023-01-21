@@ -1,32 +1,29 @@
 // import 'server-only'
 
-import { IInvoice } from "../models/model";
+import IInvoice from '../interfaces/invoice';
 
 const uri = 'http://localhost:3000';
 
 export async function getData() {
-  console.log('Pleaasssedeeeeee');
+  try {
+    console.log('Pleaasssedeeeeee');
 
-  const res = await fetch(`${uri}/api/invoice`);
-  if (!res.ok) {
-    throw new Error('failed to fetch data');
+    const res = await fetch(`${uri}/api/invoice`);
+    return res.json();
+  } catch (error) {
+    throw new Error('failed to fetchhhhhh : ' + error);
   }
-
-  return res.json();
 }
 
 export async function getDataById(id: string) {
-
   try {
     console.log(`${uri}/api/invoice/${id}`);
-  
-  const res = await fetch(`${uri}/api/invoice/${id}`);
-  return res.json();
+
+    const res = await fetch(`${uri}/api/invoice/${id}`);
+    return res.json();
   } catch (error) {
     console.log(error);
-    
   }
-  
 }
 
 export async function getInvoiceDataById(id: string) {
@@ -38,7 +35,7 @@ export async function getInvoiceDataById(id: string) {
   return res.json();
 }
 
-export async function submitData<Invoice>(data: IInvoice) {
+export async function submitData<IInvoice>(data: IInvoice) {
   try {
     const res = await fetch(`${uri}/api/invoice`, {
       method: 'POST',

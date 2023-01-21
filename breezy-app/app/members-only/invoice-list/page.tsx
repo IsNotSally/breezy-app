@@ -2,7 +2,7 @@
 import { getData } from '../../../utils/dataFetch';
 import '../../../components/displayInvoiceList.css';
 import DisplayInvoiceList from '../../../components/displayInvoiceList';
-import { IInvoice} from '../../../models/model';
+import { IInvoice} from '../../../models/invoice';
 
 export default async function FetchInvoiceList() {
   console.log('herrrrrrrr');
@@ -10,11 +10,11 @@ export default async function FetchInvoiceList() {
   const data = await getData();
   console.log(data);
   
-  const invoice: Array<IInvoice>= data;
+  const invoices: Array<IInvoice> = data;
 
   return (
     <>
-      <DisplayInvoiceList invoice={invoice} />
+      <DisplayInvoiceList invoices={invoices} />
     </>
   );
 }

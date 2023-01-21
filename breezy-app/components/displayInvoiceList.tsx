@@ -5,18 +5,19 @@ import React from 'react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
+import { IInvoice } from '../models/invoice';
 
-function DisplayInvoiceList({ invoice }) {
-  const [isPaid, setPaidStatus] = useState([]);
+function DisplayInvoiceList({ invoices }: { invoices: IInvoice[] }) {
+  const [isPaid, setPaidStatus] = useState<IInvoice[]>([]);
   const [paidRender, setPaidRender] = useState(false);
 
   function findPaid() {
-    let paid = invoice.filter((invoice) => invoice.paid === true);
+    let paid = invoices.filter((invoice) => invoice.paid === true);
     setPaidStatus(paid);
     setPaidRender(true);
   }
   function findUnpaid() {
-    let unPaid = invoice.filter((invoice) => invoice.paid === false);
+    let unPaid = invoices.filter((invoice) => invoice.paid === false);
     setPaidStatus(unPaid);
     setPaidRender(true);
   }
@@ -25,10 +26,10 @@ function DisplayInvoiceList({ invoice }) {
     setPaidRender(false);
   }
 
-  console.log(invoice);
+  console.log(invoices);
 
-  function GetDate(date) {
-    date = new Date(date);
+  function GetDate(datemilli: string) {
+    let date = new Date(datemilli);
 
     let month = date.toLocaleString([], {
       month: 'short',
@@ -41,22 +42,16 @@ function DisplayInvoiceList({ invoice }) {
       year: 'numeric',
     });
 
-    if (month < 10) {
+    if (Number(month) < 10) {
       month = `0${month}`;
     }
-    if (day < 10) {
+    if (Number(day) < 10) {
       day = `0${day}`;
     }
 
     const formatedDate = `${month} ${day}, ${year}`;
     return formatedDate;
   }
-
-  const currentDate = GetDate(Date.now());
-  const dueDate = GetDate(invoice.date);
-  console.log(invoice.date);
-
-  const newDate = GetDate(invoice.date);
 
   return (
     <>
@@ -79,8 +74,8 @@ function DisplayInvoiceList({ invoice }) {
 
           {!paidRender ? (
             <tbody>
-              {invoice.map((invoice) => (
-                <tr key={invoice._id}>
+              {invoices.map((invoice) => (
+                <tr key={invoice._id.toString()}>
                   <td>
                     <Link href={`/members-only/invoice/${invoice._id}`}>
                       #{invoice.purchaseOrderNumber}
@@ -95,7 +90,7 @@ function DisplayInvoiceList({ invoice }) {
           ) : (
             <tbody>
               {isPaid.map((invoice) => (
-                <tr key={invoice._id}>
+                <tr key={invoice._id.toString()}>
                   <td>
                     <Link href={`/members-only/invoice/${invoice._id}`}>
                       {`#${invoice.purchaseOrderNumber}`}

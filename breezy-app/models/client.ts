@@ -1,14 +1,7 @@
-import mongoose, { Schema, model } from 'mongoose';
+import mongoose from '../db/db';
+import IClient from '../interfaces/clients';
 
-export interface IClient {
-  _id: mongoose.Types.ObjectId;
-  clientFullName: string;
-  clientAddress: string;
-  clientPhoneNumber: number;
-  clientEmail: string;
-}
-
-const clientSchema = new Schema<IClient>({
+const clientSchema = new mongoose.Schema<IClient>({
   clientFullName: {
     type: String,
     required: false,
@@ -24,9 +17,9 @@ const clientSchema = new Schema<IClient>({
   clientEmail: {
     type: String,
     required: false,
-  }
+  },
 });
 
-const Client = model<IClient>('Client', clientSchema);
+const Client = mongoose.model<IClient>('Client', clientSchema);
 
 export default Client;
