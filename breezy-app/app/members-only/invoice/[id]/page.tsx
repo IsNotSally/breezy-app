@@ -11,11 +11,13 @@ import IInvoice from '../../../../interfaces/invoice';
 //this params is from the route(the folder name--invoice/[id])
 export default async function FetchInvoice({ params } : {params: Params}) {
   const id = params.id;
-  console.log(id);
+  console.log('the id:' + id);
   
   const data: IInvoice  = await getDataById(id);
-  const invoice = data;
-
+  
+  const myinvoice = data;
+  console.log(myinvoice);
+  
   function GetDate(date:any) {
     date = new Date(date);
 
@@ -42,7 +44,9 @@ export default async function FetchInvoice({ params } : {params: Params}) {
   }
 
   const currentDate = GetDate(Date.now());
-  const dueDate = GetDate(invoice.date);
+  console.log(myinvoice);
+  
+  const dueDate = GetDate(myinvoice.date);
   
 
   return (
@@ -61,7 +65,7 @@ export default async function FetchInvoice({ params } : {params: Params}) {
                     INVOICE #1
                     <br />
                     <br/>
-                    <strong>PO Number:#{invoice.purchaseOrderNumber}</strong>
+                    <strong>PO Number:#{myinvoice.purchaseOrderNumber}</strong>
                     <br/>
                     <strong>Date:</strong> {currentDate}
                     <br />
@@ -77,21 +81,21 @@ export default async function FetchInvoice({ params } : {params: Params}) {
               <table>
                 <tr> 
                   <td>
-                    {invoice.fullName}
+                    {myinvoice.fullName}
                     <br />
-                    {invoice.address}
+                    {myinvoice.address}
                     <br />
-                    {invoice.email}
+                    {myinvoice.email}
                   </td>
 
                   <td>
                     <strong>Bill To</strong>
                     <br/>
-                    {invoice.clientFullName}
+                    {myinvoice.clientFullName}
                     <br />
-                    {invoice.clientAddress}
+                    {myinvoice.clientAddress}
                     <br />
-                    {invoice.clientEmail}
+                    {myinvoice.clientEmail}
                   </td>
                 </tr>
               </table>
@@ -104,15 +108,15 @@ export default async function FetchInvoice({ params } : {params: Params}) {
           </tr>
 
           <tr className='item'>
-            <td>{invoice.description}</td>
+            <td>{myinvoice.description}</td>
 
-            <td>£{invoice.rate}</td>
+            <td>£{myinvoice.rate}</td>
           </tr>
 
           <tr className='total'>
             <td></td>
 
-            <td>Total: £{invoice.rate}</td>
+            <td>Total: £{myinvoice.rate}</td>
           </tr>
         </table>
       </div>

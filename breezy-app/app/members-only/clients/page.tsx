@@ -5,8 +5,8 @@ import { getData } from '../../../utils/dataFetch';
 
 
 export default async function FetchClients() {
-  const data = await getData();
-  const client: Array<IClient> = data;
+  const client:IClient[] = await getData();
+  // const client: Array<IClient> = data;
 
   return (
     <>
