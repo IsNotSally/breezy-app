@@ -11,7 +11,7 @@ import {
   ChakraProvider,
   Input,
 } from '@chakra-ui/react';
-import { IInvoice } from '../models/invoice';
+import IInvoice from '../interfaces/invoice';
 
 function InvoiceForm() {
   const [fullName, setFullName] = useState('');
@@ -35,6 +35,7 @@ function InvoiceForm() {
   function handleSubmit(event: any) {
     event.preventDefault();
     const newInvoiceData: IInvoice = {
+      _id: null,
       fullName,
       address,
       phoneNumber,

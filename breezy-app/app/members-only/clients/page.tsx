@@ -1,6 +1,6 @@
 import React from 'react';
 import DisplayClients from '../../../components/displayClients';
-import { IClient } from '../../../models/client';
+import IClient from '../../../interfaces/clients';
 import { getData } from '../../../utils/dataFetch';
 
 
@@ -11,8 +11,8 @@ export default async function FetchClients() {
   return (
     <>
       {client.map((clt) => (
-        <div key={clt._id.toString()}>
-          <DisplayClients key={clt._id.toString()} clientData={clt} />
+        <div key={clt._id}>
+          <DisplayClients key={clt._id} clientData={clt} />
         </div>
       ))}
     </>

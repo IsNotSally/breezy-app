@@ -5,7 +5,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { IInvoice } from '../models/invoice';
+import IInvoice from '../interfaces/invoice';
 
 function DisplayInvoiceList({ invoices }: { invoices: IInvoice[] }) {
   const [isPaid, setPaidStatus] = useState<IInvoice[]>([]);

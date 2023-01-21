@@ -1,4 +1,5 @@
 export default interface IInvoice {
+  _id: any,
   fullName: string;
   address: string;
   phoneNumber: string;

@@ -9,13 +9,13 @@ import { ChakraProvider } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Button, ButtonGroup } from '@chakra-ui/react';
 import { updateData } from '../utils/dataFetch';
-import { IInvoice } from '../models/invoice';
+import IInvoice from '../interfaces/invoice';
 
 type Props = {
   invoice: IInvoice,
   dueDate: string,
   currentDate: string,
-  amount: number,
+  amount: string,
 }
 
 export default function ClientViewInvoice({

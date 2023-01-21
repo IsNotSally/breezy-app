@@ -2,12 +2,12 @@
 import { getData } from '../../../utils/dataFetch';
 import '../../../components/displayInvoiceList.css';
 import DisplayInvoiceList from '../../../components/displayInvoiceList';
-import { IInvoice} from '../../../models/invoice';
+import IInvoice from '../../../interfaces/invoice'; 
 
 export default async function FetchInvoiceList() {
   console.log('herrrrrrrr');
   
-  const data = await getData();
+  const data:IInvoice[] = await getData();
   console.log(data);
   
   const invoices: Array<IInvoice> = data;

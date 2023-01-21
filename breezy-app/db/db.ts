@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const dbUrl = 'mongodb://127.0.0.1:27017/breezy-app';
 
 // mongoose.set('', true);
-mongoose.connect(dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 

@@ -6,7 +6,7 @@ import Logo from '../../../../public/For Web/png/Black logo - no background.png'
 import Image from 'next/image';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import { getDataById } from '../../../../utils/dataFetch';
-import { IInvoice } from '../../../../models/invoice';
+import IInvoice from '../../../../interfaces/invoice'; 
 
 //this params is from the route(the folder name--invoice/[id])
 export default async function FetchInvoice({ params } : {params: Params}) {

@@ -5,7 +5,7 @@ import '../components/displayClient.css';
 import React from 'react';
 import Link from 'next/link';
 import { BsPersonCircle } from 'react-icons/bs';
-import { IClient } from '../models/client';
+import IClient from '../interfaces/clients';
 
 function DisplayClients({ clientData }: { clientData: IClient }) {
   return (
