@@ -1,4 +1,7 @@
+import IClient from "./clients";
+
 export default interface IInvoice {
+  client: IClient,
   _id: any,
   fullName: string;
   address: string;

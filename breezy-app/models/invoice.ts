@@ -2,6 +2,10 @@ import mongoose from '../db/db';
 import IInvoice from '../interfaces/invoice';
 
 const invoiceSchema = new mongoose.Schema<IInvoice>({
+  client: {
+    type: mongoose.Types.ObjectId,
+    required: true
+  },
   fullName: {
     type: String,
     required: false,
