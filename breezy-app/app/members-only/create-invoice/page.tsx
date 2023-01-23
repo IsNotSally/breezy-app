@@ -4,7 +4,7 @@ export default async function CreateInvoice() {
    
   return (
     <>
-      <InvoiceForm />
+      <InvoiceForm existingClient={null} />
     </>
   );
 }

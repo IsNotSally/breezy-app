@@ -1,87 +1,54 @@
-
-// import DisplayInvoice from '../../../../components/displayInvoice';
-import '../../../../components/displayInvoice.css'
+import '../../../../components/displayInvoice.css';
 import React from 'react';
-import Logo from '../../../../public/For Web/png/Black logo - no background.png';
-import Image from 'next/image';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-import { getClientDataById, getDataById, getInvoiceDataByUserId } from '../../../../utils/dataFetch';
-import IInvoice from '../../../../interfaces/invoice'; 
+import {
+  getClientDataById,
+  getInvoiceDataByUserId,
+} from '../../../../utils/dataFetch';
 import IClient from '../../../../interfaces/clients';
 import DisplayInvoiceList from '../../../../components/displayInvoiceList';
+import Link from 'next/link';
 
 //this params is from the route(the folder name--invoice/[id])
-export default async function FetchInvoice({ params } : {params: Params}) {
+export default async function FetchInvoice({ params }: { params: Params }) {
   const id = params.id;
-  const data: IClient  = await getClientDataById(id);
+  const data: IClient = await getClientDataById(id);
   const myclient = data;
-  
+
   const invoices = await getInvoiceDataByUserId(myclient._id);
 
   return (
     <>
-      <div className='client-box'>
-      <h2>Client details</h2>
-      <form className="form form-user-data">
-          <div className="form__group">
-            <label className="form__label" htmlFor="name">
-              Name
-            </label>
-            <input
-              className="form__input"
-              id="name"
-              type="text"
-              value={myclient.clientFullName}
-              required
-              name="name"
-            />
-          </div>
-          <div className="form__group">
-            <label className="form__label" htmlFor="name">
-              Phone Number
-            </label>
-            <input
-              className="form__input"
-              id="name"
-              type="text"
-              value={myclient.clientPhoneNumber}
-              required
-              name="name"
-            />
-          </div>
-          <div className="form__group">
-            <label className="form__label" htmlFor="email">
-              Email address
-            </label>
-            <input
-              className="form__input"
-              id="email"
-              type="email"
-              value={myclient.clientEmail}
-              required
-              name="email"
-            />
-          </div>
+      <div className="client-box">
+        <h2>Client details</h2>
 
-          <div className="form__group">
-            <label className="form__label" htmlFor="name">
-              Address
-            </label>
-            <input
-              className="form__input"
-              id="name"
-              type="text"
-              value={myclient.clientAddress}
-              required
-              name="name"
-            />
-          </div>
-        </form>
-        <h2>Invoices list: </h2>
+        <div className="myflex">
+          <div>Name :</div>
+          <div>{myclient.clientFullName}</div>
+        </div>
+
+        <div className="myflex">
+          <div>Phone Number :</div>
+          <div>{myclient.clientPhoneNumber}</div>
+        </div>
+
+        <div className="myflex">
+          <div>Email address :</div>
+          <div>{myclient.clientEmail}</div>
+        </div>
+
+        <div className="myflex">
+          <div>Address :</div>
+          <div>{myclient.clientAddress}</div>
+        </div>
+
+        <Link
+          href={`/members-only/clients/${myclient._id}/create-client-invoice`}
+        >
+          <h2>Create Invoice</h2>
+        </Link>
         <DisplayInvoiceList invoices={invoices} />
       </div>
     </>
   );
 }
-
-

@@ -14,7 +14,7 @@ import {
 import IInvoice from '../interfaces/invoice';
 import IClient from '../interfaces/clients';
 
-function InvoiceForm() {
+function InvoiceForm({existingClient}) {
   const [fullName, setFullName] = useState('');
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -38,19 +38,24 @@ function InvoiceForm() {
 
   async function handleSubmit(event: any) {
     event.preventDefault();
-    const newClient: IClient = {
-      clientFullName,
-      clientAddress,
-      clientPhoneNumber,
-      clientEmail,
+    let clientId = existingClient;
+
+    if(!existingClient) {
+      const newClient: IClient = {
+        clientFullName,
+        clientAddress,
+        clientPhoneNumber,
+        clientEmail,
+      }
+     
+      const createdClient = await pushClient(newClient) 
+
+      clientId = createdClient._id;
     }
-   
-    const createdClient = await pushClient(newClient) 
-   
-    console.log(createdClient);
+    
 
     const newInvoiceData: IInvoice = {
-      client: createdClient._id,
+      client: clientId,
       // _id: null,
       fullName,
       address,
@@ -91,56 +96,8 @@ console.log(newInvoiceData);
       <form onSubmit={handleSubmit} autoComplete='off'>
         <div className='form-container'>
           <div className='people-details-container'>
-            <div className='personal-details-container'>
-              <h2>
-                <strong>Personal Details</strong>
-              </h2>
-              <br />
-
-              <FormControl>
-                <FormLabel>Full Name</FormLabel>
-                <Input
-                  type='text'
-                  name='client-full'
-                  value={fullName}
-                  placeholder='Insert full name...'
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Address</FormLabel>
-                <Input
-                  type='text'
-                  name='phone-number'
-                  value={address}
-                  placeholder='Insert address...'
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Phone Number</FormLabel>
-                <Input
-                  type='number'
-                  name='phone-number'
-                  value={phoneNumber}
-                  placeholder='Insert phone number...'
-                  onChange={(e) => setPhoneNumber(e.target.value)}
-                />
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Email Address</FormLabel>
-                <Input
-                  type='email'
-                  name='email-address'
-                  value={email}
-                  placeholder='Insert email address...'
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </FormControl>
-              <br />
-
+            {!existingClient ? <div className='personal-details-container'>
+              
               <h2>
                 <strong>Client Details</strong>
               </h2>
@@ -188,7 +145,7 @@ console.log(newInvoiceData);
                   onChange={(e) => setClientEmail(e.target.value)}
                 />
               </FormControl>
-            </div>
+            </div> : <></>}
             <div className='job-details-container'>
               <h2>
                 <strong>Job Details</strong>

@@ -6,3 +6,8 @@ body {
   margin: 0;
   font-size: 20px;
 }
+
+.myflex {
+  display: flex;
+  gap: 20px;
+}
