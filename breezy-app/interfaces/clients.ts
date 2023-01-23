@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 
 export default interface IClient {
-  _id: any,
+  _id:any,
   clientFullName: string;
   clientAddress: string;
-  clientPhoneNumber: number;
+  clientPhoneNumber: string;
   clientEmail: string;
 }
