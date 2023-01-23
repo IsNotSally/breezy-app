@@ -51,7 +51,7 @@ export default function LandingPage() {
       <div className={styles.inputBox}>
         {/* <span className={styles.input}> */}
         {showInput && (
-          <form onSubmit={handleSubmit} className={styles.input}>
+          <form onSubmit={handleSubmit} id='pay-invoice' className={styles.input}>
             <input
               onChange={(e) => setInputValue(e.target.value)}
               value={inputValue}
