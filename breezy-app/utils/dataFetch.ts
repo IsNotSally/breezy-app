@@ -1,5 +1,6 @@
 // import 'server-only'
 
+import IClient from '../interfaces/clients';
 import IInvoice from '../interfaces/invoice';
 
 const uri = 'http://localhost:3000';
@@ -55,6 +56,21 @@ export async function updateData(id: string, data: IInvoice) {
   try {
     const res = await fetch(`${uri}/api/invoices/${id}`, {
       method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function createClient<IClient>(data: IClient) {
+  try {
+    const res = await fetch(`${uri}/api/clients`, {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
