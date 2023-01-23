@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import '../components/invoice-form.css';
-import { submitData } from '../utils/dataFetch';
+import { createClient, submitData } from '../utils/dataFetch';
 import Link from 'next/link';
 import React from 'react';
 import {
@@ -12,6 +12,7 @@ import {
   Input,
 } from '@chakra-ui/react';
 import IInvoice from '../interfaces/invoice';
+import IClient from '../interfaces/clients';
 
 function InvoiceForm() {
   const [fullName, setFullName] = useState('');
@@ -27,15 +28,30 @@ function InvoiceForm() {
   const [rate, setRate] = useState('');
   const [date, setDate] = useState('');
 
-  
+  const pushClient = async (client:IClient) => {
+    return await createClient(client)
+  }
+
   const pushInvoice = async (invoice: IInvoice) => {
     const newInvoice = await submitData(invoice);
   };
 
-  function handleSubmit(event: any) {
+  async function handleSubmit(event: any) {
     event.preventDefault();
+    const newClient: IClient = {
+      clientFullName,
+      clientAddress,
+      clientPhoneNumber,
+      clientEmail,
+    }
+   
+    const createdClient = await pushClient(newClient) 
+   
+    console.log(createdClient);
+
     const newInvoiceData: IInvoice = {
-      _id: null,
+      client: createdClient._id,
+      // _id: null,
       fullName,
       address,
       phoneNumber,
@@ -52,6 +68,7 @@ function InvoiceForm() {
     };
 
     pushInvoice(newInvoiceData);
+console.log(newInvoiceData);
 
     setFullName('');
     setAddress('');

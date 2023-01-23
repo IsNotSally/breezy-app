@@ -5,7 +5,7 @@ export default interface IClient {
   _id: any;
   clientFullName: string;
   clientAddress: string;
-  clientPhoneNumber: number;
+  clientPhoneNumber: string;
   clientEmail: string;
   invoices: IInvoice[];
 }
