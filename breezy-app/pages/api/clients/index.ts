@@ -1,6 +1,6 @@
-
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import Client from '../../../models/client';
+import Invoice from '../../../models/invoice';
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,16 +11,16 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
-        
+        const clients = await Client.find();
+        res.status(200).json(clients);
       } catch (e) {
-        
+        res.status(400).json({ success: false });
       }
       break;
     case 'POST':
       try {
-
         const client = await Client.create(req.body);
-        
+        client!.invoices = await Invoice.find({ client: client._id });
         res.status(201).json(client);
       } catch (e) {
         console.log(e);
@@ -29,9 +29,6 @@ export default async function handler(
       break;
     case 'DELETE':
       try {
-       
-      } catch (e) {
-       
-      }
+      } catch (e) {}
   }
 }

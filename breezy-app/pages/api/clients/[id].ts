@@ -2,6 +2,7 @@ import Client from '../../../models/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import IClient from '../../../interfaces/clients';
 import Invoice from '../../../models/invoice';
+import IInvoice from '../../../interfaces/invoice';
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,8 +14,8 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
-        const client: IClient | null = await Client.findOne({ _id: id });
-        client!.invoices = await Invoice.find({ client: id });
+        const client = await Client.findOne({ _id: id });
+
         if (!client) {
           return res.status(400).json(client);
         }

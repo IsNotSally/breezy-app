@@ -11,7 +11,6 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
-        console.log('give me invoice');
         const invoice = await Invoice.find();
         res.status(200).json(invoice);
       } catch (e) {

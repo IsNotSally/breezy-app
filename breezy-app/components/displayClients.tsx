@@ -11,7 +11,7 @@ function DisplayClients({ clientData }: { clientData: IClient }) {
   return (
     <div className='container'>
       <div className='grid'>
-        <Link href={`/members-only/invoice/${clientData._id}`}>
+        <Link href={`/members-only/clients/${clientData._id}`}>
           <div className='box'>
             <div className='icon'>
               <BsPersonCircle />

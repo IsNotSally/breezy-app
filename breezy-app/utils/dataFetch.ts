@@ -7,9 +7,16 @@ const uri = 'http://localhost:3000';
 
 export async function getData() {
   try {
-    console.log('Pleaasssedeeeeee');
-
     const res = await fetch(`${uri}/api/invoices`);
+    return res.json();
+  } catch (error) {
+    throw new Error('failed to fetchhhhhh : ' + error);
+  }
+}
+
+export async function getClientData() {
+  try {
+    const res = await fetch(`${uri}/api/clients`);
     return res.json();
   } catch (error) {
     throw new Error('failed to fetchhhhhh : ' + error);
@@ -18,8 +25,6 @@ export async function getData() {
 
 export async function getClientDataById(id: string) {
   try {
-    console.log(`${uri}/api/clients/${id}`);
-
     const res = await fetch(`${uri}/api/clients/${id}`);
 
     return res.json();
@@ -42,6 +47,15 @@ export async function getDataById(id: string) {
 
 export async function getInvoiceDataById(id: string) {
   const res = await fetch(`${uri}/api/invoices/po/${id}`);
+  if (!res.ok) {
+    throw new Error('failed to fetch data');
+  }
+
+  return res.json();
+}
+
+export async function getInvoiceDataByUserId(id: string) {
+  const res = await fetch(`${uri}/api/invoices/user/${id}`);
   if (!res.ok) {
     throw new Error('failed to fetch data');
   }

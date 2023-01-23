@@ -5,7 +5,7 @@ import React from 'react';
 import Logo from '../../../../public/For Web/png/Black logo - no background.png';
 import Image from 'next/image';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
-import { getClientDataById, getDataById } from '../../../../utils/dataFetch';
+import { getClientDataById, getDataById, getInvoiceDataByUserId } from '../../../../utils/dataFetch';
 import IInvoice from '../../../../interfaces/invoice'; 
 import IClient from '../../../../interfaces/clients';
 import DisplayInvoiceList from '../../../../components/displayInvoiceList';
@@ -15,7 +15,8 @@ export default async function FetchInvoice({ params } : {params: Params}) {
   const id = params.id;
   const data: IClient  = await getClientDataById(id);
   const myclient = data;
-  const invoices = myclient.invoices;
+  
+  const invoices = await getInvoiceDataByUserId(myclient._id);
 
   return (
     <>
