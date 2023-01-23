@@ -16,12 +16,24 @@ export async function getData() {
   }
 }
 
+export async function getClientDataById(id: string) {
+  try {
+    console.log(`${uri}/api/clients/${id}`);
+
+    const res = await fetch(`${uri}/api/clients/${id}`);
+
+    return res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function getDataById(id: string) {
   try {
     console.log(`${uri}/api/invoices/${id}`);
 
     const res = await fetch(`${uri}/api/invoices/${id}`);
-    
+
     return res.json();
   } catch (error) {
     console.log(error);
