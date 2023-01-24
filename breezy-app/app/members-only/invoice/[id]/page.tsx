@@ -1,24 +1,20 @@
-
 // import DisplayInvoice from '../../../../components/displayInvoice';
-import '../../../../components/displayInvoice.css'
+import '../../../../components/displayInvoice.css';
 import React from 'react';
 import Logo from '../../../../public/For Web/png/Black logo - no background.png';
 import Image from 'next/image';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import { getDataById } from '../../../../utils/dataFetch';
-import IInvoice from '../../../../interfaces/invoice'; 
+import IInvoice from '../../../../interfaces/invoice';
 
 //this params is from the route(the folder name--invoice/[id])
-export default async function FetchInvoice({ params } : {params: Params}) {
+export default async function FetchInvoice({ params }: { params: Params }) {
   const id = params.id;
-  console.log('the id:' + id);
-  
-  const data: IInvoice  = await getDataById(id);
-  
+  const data: IInvoice = await getDataById(id);
+
   const myinvoice = data;
-  console.log(myinvoice);
-  
-  function GetDate(date:any) {
+
+  function GetDate(date: any) {
     date = new Date(date);
 
     let month = date.toLocaleString([], {
@@ -31,7 +27,7 @@ export default async function FetchInvoice({ params } : {params: Params}) {
     let year = date.toLocaleString([], {
       year: 'numeric',
     });
-    
+
     if (month < 10) {
       month = `0${month}`;
     }
@@ -44,42 +40,41 @@ export default async function FetchInvoice({ params } : {params: Params}) {
   }
 
   const currentDate = GetDate(Date.now());
-  console.log(myinvoice);
-  
+
   const dueDate = GetDate(myinvoice.date);
-  
 
   return (
     <>
-      <div className='invoice-box'>
-        <table cellPadding='0' cellSpacing='0'>
-          <tr className='top'>
+      <div className="invoice-box">
+        <table cellPadding="0" cellSpacing="0">
+          <tr className="top">
             <td colSpan={3}>
               <table>
                 <tr>
-                  <td className='title'>
-                    <Image src={Logo} width={150} alt='logo'></Image>
+                  <td className="title">
+                    <Image src={Logo} width={150} alt="logo"></Image>
                   </td>
 
                   <td>
                     INVOICE #1
                     <br />
-                    <br/>
+                    <br />
                     <strong>PO Number:#{myinvoice.purchaseOrderNumber}</strong>
-                    <br/>
+                    <br />
                     <strong>Date:</strong> {currentDate}
                     <br />
-                    <strong>Due:</strong> {dueDate === currentDate ? 'On Receipt' : dueDate}
+                    <strong>Due:</strong>{' '}
+                    {dueDate === currentDate ? 'On Receipt' : dueDate}
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
 
-          <tr className='information'>
+          <tr className="information">
             <td colSpan={2}>
               <table>
-                <tr> 
+                <tr>
                   <td>
                     {myinvoice.fullName}
                     <br />
@@ -90,7 +85,7 @@ export default async function FetchInvoice({ params } : {params: Params}) {
 
                   <td>
                     <strong>Bill To</strong>
-                    <br/>
+                    <br />
                     {myinvoice.clientFullName}
                     <br />
                     {myinvoice.clientAddress}
@@ -102,18 +97,18 @@ export default async function FetchInvoice({ params } : {params: Params}) {
             </td>
           </tr>
 
-          <tr className='heading'>
+          <tr className="heading">
             <td>Item</td>
             <td>Price</td>
           </tr>
 
-          <tr className='item'>
+          <tr className="item">
             <td>{myinvoice.description}</td>
 
             <td>£{myinvoice.rate}</td>
           </tr>
 
-          <tr className='total'>
+          <tr className="total">
             <td></td>
 
             <td>Total: £{myinvoice.rate}</td>
@@ -123,5 +118,3 @@ export default async function FetchInvoice({ params } : {params: Params}) {
     </>
   );
 }
-
-

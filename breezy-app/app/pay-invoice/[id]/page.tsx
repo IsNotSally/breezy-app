@@ -3,10 +3,9 @@ import React from 'react';
 import ClientViewInvoice from '../../../components/client-view-invoice';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 
-export default async function FetchInvoice({ params }: {params: Params}) {
+export default async function FetchInvoice({ params }: { params: Params }) {
   const id = params.id;
-  const data = await getInvoiceDataById(id);
-  const invoice = data;
+  const invoice = await getInvoiceDataById(id);
 
   function GetDate(date: number) {
     let fullDate = new Date(date);

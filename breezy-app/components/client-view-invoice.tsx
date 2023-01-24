@@ -12,11 +12,11 @@ import { updateData } from '../utils/dataFetch';
 import IInvoice from '../interfaces/invoice';
 
 type Props = {
-  invoice: IInvoice,
-  dueDate: string,
-  currentDate: string,
-  amount: string,
-}
+  invoice: IInvoice;
+  dueDate: string;
+  currentDate: string;
+  amount: string;
+};
 
 export default function ClientViewInvoice({
   invoice,
@@ -24,9 +24,6 @@ export default function ClientViewInvoice({
   currentDate,
   amount,
 }: Props) {
-
-  console.log('PDFFffffffff');
-  console.log(invoice);
   const [invoiceStatus, setInvoiceStatus] = useState(invoice.paid);
 
   const updateStatus = async (invoice: IInvoice) => {
@@ -64,7 +61,7 @@ export default function ClientViewInvoice({
                     <table>
                       <tr>
                         <td className="title">
-                          <Image alt='logo' src={Logo} width={150}></Image>
+                          <Image alt="logo" src={Logo} width={150}></Image>
                         </td>
 
                         <td>

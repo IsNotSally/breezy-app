@@ -8,16 +8,15 @@ export default async function handler(
 ) {
   const { method } = req;
   const id = req.query.id;
-  console.log(req.query);
-  console.log(req.method);
-  console.log(id);
 
   switch (method) {
     case 'GET':
       try {
         const invoice = await Invoice.findOne({ purchaseOrderNumber: id });
         if (!invoice) {
-          return res.status(400).json(invoice);
+          return res
+            .status(400)
+            .json({ error: 'No invoice exists with the PO number: ' + id });
         }
         res.status(200).json(invoice);
       } catch (error) {

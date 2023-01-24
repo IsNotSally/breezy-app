@@ -8,9 +8,6 @@ export default async function handler(
 ) {
   const { method } = req;
   const id = req.query.id;
-  console.log(req.query);
-  console.log(req.method);
-  console.log(id);
 
   switch (method) {
     case 'GET':

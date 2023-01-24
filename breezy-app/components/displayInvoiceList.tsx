@@ -26,8 +26,6 @@ function DisplayInvoiceList({ invoices }: { invoices: IInvoice[] }) {
     setPaidRender(false);
   }
 
-  console.log(invoices);
-
   function GetDate(datemilli: string) {
     let date = new Date(datemilli);
 
@@ -56,13 +54,13 @@ function DisplayInvoiceList({ invoices }: { invoices: IInvoice[] }) {
   return (
     <>
       <ChakraProvider>
-        <div className='filter-buttons'>
+        <div className="filter-buttons">
           <button onClick={findUnpaid}>OUTSTANDING </button>
           <button onClick={findPaid}>PAID</button>
           <button onClick={allInvoices}>ALL INVOICES</button>
         </div>
 
-        <table className='GeneratedTable'>
+        <table className="GeneratedTable">
           <thead>
             <tr>
               <th>Invoice</th>

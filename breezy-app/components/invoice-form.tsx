@@ -14,7 +14,7 @@ import {
 import IInvoice from '../interfaces/invoice';
 import IClient from '../interfaces/clients';
 
-function InvoiceForm({existingClient}) {
+function InvoiceForm({ existingClient }: { existingClient: string }) {
   const [fullName, setFullName] = useState('');
   const [address, setAddress] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -28,9 +28,9 @@ function InvoiceForm({existingClient}) {
   const [rate, setRate] = useState('');
   const [date, setDate] = useState('');
 
-  const pushClient = async (client:IClient) => {
-    return await createClient(client)
-  }
+  const pushClient = async (client: IClient) => {
+    return await createClient(client);
+  };
 
   const pushInvoice = async (invoice: IInvoice) => {
     const newInvoice = await submitData(invoice);
@@ -40,19 +40,18 @@ function InvoiceForm({existingClient}) {
     event.preventDefault();
     let clientId = existingClient;
 
-    if(!existingClient) {
+    if (!existingClient) {
       const newClient: IClient = {
         clientFullName,
         clientAddress,
         clientPhoneNumber,
         clientEmail,
-      }
-     
-      const createdClient = await pushClient(newClient) 
+      };
+
+      const createdClient = await pushClient(newClient);
 
       clientId = createdClient._id;
     }
-    
 
     const newInvoiceData: IInvoice = {
       client: clientId,
@@ -69,11 +68,10 @@ function InvoiceForm({existingClient}) {
       description,
       rate: Number(rate),
       date,
-      paid: false
+      paid: false,
     };
 
     pushInvoice(newInvoiceData);
-console.log(newInvoiceData);
 
     setFullName('');
     setAddress('');
@@ -93,60 +91,63 @@ console.log(newInvoiceData);
 
   return (
     <ChakraProvider>
-      <form onSubmit={handleSubmit} autoComplete='off'>
-        <div className='form-container'>
-          <div className='people-details-container'>
-            {!existingClient ? <div className='personal-details-container'>
-              
-              <h2>
-                <strong>Client Details</strong>
-              </h2>
-              <br />
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <div className="form-container">
+          <div className="people-details-container">
+            {!existingClient ? (
+              <div className="personal-details-container">
+                <h2>
+                  <strong>Client Details</strong>
+                </h2>
+                <br />
 
-              <FormControl>
-                <FormLabel>Full Name</FormLabel>
-                <Input
-                  type='text'
-                  name='client-full'
-                  value={clientFullName}
-                  placeholder='Insert full name...'
-                  onChange={(e) => setClientFullName(e.target.value)}
-                />
-              </FormControl>
+                <FormControl>
+                  <FormLabel>Full Name</FormLabel>
+                  <Input
+                    type="text"
+                    name="client-full"
+                    value={clientFullName}
+                    placeholder="Insert full name..."
+                    onChange={(e) => setClientFullName(e.target.value)}
+                  />
+                </FormControl>
 
-              <FormControl>
-                <FormLabel>Address</FormLabel>
-                <Input
-                  type='text'
-                  name='client-address'
-                  value={clientAddress}
-                  placeholder='Insert Address...'
-                  onChange={(e) => setClientAddress(e.target.value)}
-                />
-              </FormControl>
-              <FormControl>
-                <FormLabel>Phone Number</FormLabel>
-                <Input
-                  type='text'
-                  name='client-phone-number'
-                  value={clientPhoneNumber}
-                  placeholder='Insert phone number...'
-                  onChange={(e) => setClientPhoneNumber(e.target.value)}
-                />
-              </FormControl>
+                <FormControl>
+                  <FormLabel>Address</FormLabel>
+                  <Input
+                    type="text"
+                    name="client-address"
+                    value={clientAddress}
+                    placeholder="Insert Address..."
+                    onChange={(e) => setClientAddress(e.target.value)}
+                  />
+                </FormControl>
+                <FormControl>
+                  <FormLabel>Phone Number</FormLabel>
+                  <Input
+                    type="text"
+                    name="client-phone-number"
+                    value={clientPhoneNumber}
+                    placeholder="Insert phone number..."
+                    onChange={(e) => setClientPhoneNumber(e.target.value)}
+                  />
+                </FormControl>
 
-              <FormControl>
-                <FormLabel>Email Address</FormLabel>
-                <Input
-                  type='email'
-                  name='client-phone-number'
-                  value={clientEmail}
-                  placeholder='Insert email address'
-                  onChange={(e) => setClientEmail(e.target.value)}
-                />
-              </FormControl>
-            </div> : <></>}
-            <div className='job-details-container'>
+                <FormControl>
+                  <FormLabel>Email Address</FormLabel>
+                  <Input
+                    type="email"
+                    name="client-phone-number"
+                    value={clientEmail}
+                    placeholder="Insert email address"
+                    onChange={(e) => setClientEmail(e.target.value)}
+                  />
+                </FormControl>
+              </div>
+            ) : (
+              <></>
+            )}
+            <div className="job-details-container">
               <h2>
                 <strong>Job Details</strong>
               </h2>
@@ -154,10 +155,10 @@ console.log(newInvoiceData);
               <FormControl>
                 <FormLabel>PO Number</FormLabel>
                 <Input
-                  type='text'
-                  name='po-number'
+                  type="text"
+                  name="po-number"
                   value={purchaseOrderNumber}
-                  placeholder='Insert purchase order number...'
+                  placeholder="Insert purchase order number..."
                   onChange={(e) => setPurchaseOrderNumber(e.target.value)}
                 />
               </FormControl>
@@ -167,10 +168,10 @@ console.log(newInvoiceData);
               <FormControl>
                 <FormLabel>Description</FormLabel>
                 <Input
-                  type='text'
-                  name='description'
+                  type="text"
+                  name="description"
                   value={description}
-                  placeholder='Insert description...'
+                  placeholder="Insert description..."
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </FormControl>
@@ -178,10 +179,10 @@ console.log(newInvoiceData);
               <FormControl>
                 <FormLabel>Rate</FormLabel>
                 <Input
-                  type='text'
-                  name='rate'
+                  type="text"
+                  name="rate"
                   value={rate}
-                  placeholder='Insert rate...'
+                  placeholder="Insert rate..."
                   onChange={(e) => setRate(e.target.value)}
                 />
               </FormControl>
@@ -189,14 +190,14 @@ console.log(newInvoiceData);
               <FormControl>
                 <FormLabel>Due By</FormLabel>
                 <Input
-                  type='datetime-local'
-                  name='date'
+                  type="datetime-local"
+                  name="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </FormControl>
 
-              <input type='submit' value='CREATE INVOICE' />
+              <input type="submit" value="CREATE INVOICE" />
             </div>
           </div>
           {/* </div> */}

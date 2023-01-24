@@ -35,8 +35,6 @@ export async function getClientDataById(id: string) {
 
 export async function getDataById(id: string) {
   try {
-    console.log(`${uri}/api/invoices/${id}`);
-
     const res = await fetch(`${uri}/api/invoices/${id}`);
 
     return res.json();
@@ -47,9 +45,10 @@ export async function getDataById(id: string) {
 
 export async function getInvoiceDataById(id: string) {
   const res = await fetch(`${uri}/api/invoices/po/${id}`);
-  if (!res.ok) {
-    throw new Error('failed to fetch data');
-  }
+  // if (!res.ok) {
+  //   alert(res.json());
+  //   throw new Error('failed to fetch data');
+  // }
 
   return res.json();
 }
