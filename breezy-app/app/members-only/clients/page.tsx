@@ -12,11 +12,13 @@ export default async function FetchClients() {
 
   return (
     <>
+    <section>
       {client.map((clt) => (
         <div key={clt._id}>
           <DisplayClients key={clt._id} clientData={clt} />
         </div>
       ))}
+      </section>
     </>
   );
 }

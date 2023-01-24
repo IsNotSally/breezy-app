@@ -13,11 +13,13 @@ import styles from '../../styles/sidebar.module.css';
 import Image from 'next/image';
 import Logo from '../../public/For Web/png/Black logo - no background.png';
 import React from 'react';
+import Logout from './logout';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-import Logout from './logout';
-
 export default function Layout({children} : { children : React.ReactNode }) {
+
+  
+
   const menus = [
     {
       title: 'Create Invoice',
@@ -38,8 +40,10 @@ export default function Layout({children} : { children : React.ReactNode }) {
   ];
 
   return (
-    <UserProvider>
-      <div className={styles.pageContainer}>
+    
+      <UserProvider>
+
+<div className={styles.pageContainer}>
         <div className={styles.sidebar}>
           <div className={styles.logo}>
             <Image src={Logo} alt='breezy-logo' width={250} priority></Image>
@@ -64,6 +68,8 @@ export default function Layout({children} : { children : React.ReactNode }) {
         </div>
         {children}
       </div>
-    </UserProvider>
+
+      </UserProvider>
   );
 }
+

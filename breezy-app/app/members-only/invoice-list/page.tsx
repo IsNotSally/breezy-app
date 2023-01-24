@@ -14,7 +14,9 @@ export default async function FetchInvoiceList() {
 
   return (
     <>
+    <section>
       <DisplayInvoiceList invoices={invoices} />
+      </section>
     </>
   );
 }

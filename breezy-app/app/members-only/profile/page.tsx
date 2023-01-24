@@ -10,12 +10,14 @@ export default function UserProfile() {
 
   if (user) {
     return (
-      <div>
+      <section>
+        <div>
         <img src={user.picture || ''} alt="user-image"/>
         <h2>{user.nickname}</h2>
         <p>{user.email}</p>
-        <a href='/api/auth/logout'>LOGOUT</a>
+        {/* <a href='/api/auth/logout'>LOGOUT</a> */}
       </div>
+      </section>
     );
   }
 

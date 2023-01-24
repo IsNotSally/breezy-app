@@ -1,5 +1,5 @@
 import React from "react";
-import UserProfile from "../profile";
+import UserProfile from "../profile/page";
 
 export default function Dashboard() {
   return (
