@@ -16,10 +16,11 @@ import React from 'react';
 import Logout from './logout';
 import { UserProvider } from '@auth0/nextjs-auth0/client';
 
-export default function Layout({children} : { children : React.ReactNode }) {
-
-  
-
+export default function MembersOnlyLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const menus = [
     {
       title: 'Create Invoice',
@@ -40,13 +41,11 @@ export default function Layout({children} : { children : React.ReactNode }) {
   ];
 
   return (
-    
-      <UserProvider>
-
-<div className={styles.pageContainer}>
+    <UserProvider>
+      <div className={styles.pageContainer}>
         <div className={styles.sidebar}>
           <div className={styles.logo}>
-            <Image src={Logo} alt='breezy-logo' width={250} priority></Image>
+            <Image src={Logo} alt="breezy-logo" width={250} priority></Image>
           </div>
 
           <ul className={styles.menuItems}>
@@ -68,8 +67,6 @@ export default function Layout({children} : { children : React.ReactNode }) {
         </div>
         {children}
       </div>
-
-      </UserProvider>
+    </UserProvider>
   );
 }
-
