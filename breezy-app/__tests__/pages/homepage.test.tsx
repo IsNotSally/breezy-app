@@ -1,15 +1,22 @@
 import HomePage from '@/pages/page';
+import React from 'react'
+import { useRouter } from 'next/navigation';
 import { render, screen } from '@testing-library/react';
-import React from 'react';
-import '@testing-library/jest-dom';
 
+jest.mock('next/navigation', () => ({
+  useRouter() {
+    return {
+      route: "/",
+      push: jest.fn(),
+    }
+  }
+}));
 
 describe('HomePage', () => {
-  it('should renders the landing page', () => {
+  it('should render the landing page', () => {
     render(<HomePage />);
-
-    const heading = screen.getByText('Freelancer login');
-
-    expect(heading).toBeInTheDocument()
-  });
+    const text = screen.getByText('Freelancer Login')
+    expect(text).toBeInTheDocument()
+  })
 });
+
