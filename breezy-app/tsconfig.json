@@ -38,6 +38,6 @@
     "public"
 , "next.config.js", "app/layout.tsx", "cypress/e2e/home_page.cy.js", "cypress/support/auth-provider-commands/auth0.ts"  ],
   "exclude": [
-    "node_modules"
-  ]
+    "node_modules", "cypress"
+  ],
 }
