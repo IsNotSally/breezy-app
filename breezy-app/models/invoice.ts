@@ -1,10 +1,10 @@
-import mongoose from '../db/db';
+import mongoose from 'mongoose';
 import IInvoice from '../interfaces/invoice';
 
 const invoiceSchema = new mongoose.Schema<IInvoice>({
   client: {
     type: mongoose.Types.ObjectId,
-    required: true
+    required: true,
   },
   fullName: {
     type: String,
@@ -62,6 +62,5 @@ const invoiceSchema = new mongoose.Schema<IInvoice>({
   },
 });
 
-const Invoice =  mongoose.models.Invoice || mongoose.model<IInvoice>('Invoice', invoiceSchema);
-
-export default Invoice;
+export default mongoose.models.Invoice ||
+  mongoose.model('Invoice', invoiceSchema);

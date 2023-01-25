@@ -1,6 +1,7 @@
 import connectMongo from '../../../../service/connectMongo';
 import Invoice from '../../../../models/invoice';
 import { NextApiRequest, NextApiResponse } from 'next';
+import dbConnect from 'db/db';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,6 +13,7 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
+        await dbConnect();
         const invoice = await Invoice.findOne({ purchaseOrderNumber: id });
         if (!invoice) {
           return res

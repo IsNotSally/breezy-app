@@ -1,6 +1,7 @@
 import Client from '../../../../models/client';
 import { NextApiRequest, NextApiResponse } from 'next';
 import AppError from '../../../../utils/appError';
+import dbConnect from 'db/db';
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,13 +13,13 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
+        await dbConnect();
         const client = await Client.findOne({ _id: id });
         if (!client) {
           res.status(400).json(new AppError(`Client doesn't exist`, 400, null));
         }
         res.status(200).json(client);
       } catch (e) {
-        // console.log(e);
         const err = new AppError('', 500, e);
         console.log('My Errorrrr : ' + err);
 

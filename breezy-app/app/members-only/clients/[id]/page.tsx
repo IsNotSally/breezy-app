@@ -13,7 +13,6 @@ import Link from 'next/link';
 export default async function FetchInvoice({ params }: { params: Params }) {
   const id = params.id;
   const data: IClient = await getClientById(id);
-  console.log(data);
 
   const myclient = data;
 

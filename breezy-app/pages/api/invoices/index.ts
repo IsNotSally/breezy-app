@@ -1,5 +1,6 @@
 import Invoice from '../../../models/invoice';
 import { NextApiRequest, NextApiResponse } from 'next/types';
+import dbConnect from 'db/db';
 
 export default async function handler(
   req: NextApiRequest,
@@ -10,6 +11,7 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
+        await dbConnect();
         const invoice = await Invoice.find();
         res.status(200).json(invoice);
       } catch (e) {
@@ -18,6 +20,7 @@ export default async function handler(
       break;
     case 'POST':
       try {
+        await dbConnect();
         const invoice = await Invoice.create(req.body);
         res.status(201).json(invoice);
       } catch (e) {

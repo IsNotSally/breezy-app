@@ -1,5 +1,6 @@
 import Invoice from '../../../models/invoice';
 import { NextApiRequest, NextApiResponse } from 'next';
+import dbConnect from 'db/db';
 
 export default async function handler(
   req: NextApiRequest,
@@ -11,6 +12,7 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
+        await dbConnect();
         const invoice = await Invoice.findOne({ _id: id });
         if (!invoice) {
           return res.status(400).json(invoice);
@@ -22,6 +24,7 @@ export default async function handler(
       break;
     case 'PUT':
       try {
+        await dbConnect();
         const invoice = await Invoice.findOneAndReplace(
           { _id: req.body._id },
           req.body

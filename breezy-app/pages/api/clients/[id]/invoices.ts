@@ -1,3 +1,4 @@
+import dbConnect from 'db/db';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Invoice from '../../../../models/invoice';
 
@@ -11,6 +12,7 @@ export default async function handler(
   switch (method) {
     case 'GET':
       try {
+        await dbConnect();
         const invoices = await Invoice.find({ client: id });
         if (!invoices) {
           return res.status(400).json(invoices);
