@@ -37,7 +37,7 @@ export default function LandingPage() {
       <div className={styles.container}>
         <div className={styles.loginBox}>
           <a href="/members-only">
-            <h2>Freelancer Login </h2>
+            <h2>Freelancer Login</h2>
           </a>
           <span className={styles.arrow}>
             <BsArrowRight />
