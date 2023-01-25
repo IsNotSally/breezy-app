@@ -2,9 +2,9 @@ import '../../../../components/displayInvoice.css';
 import React from 'react';
 import { Params } from 'next/dist/shared/lib/router/utils/route-matcher';
 import {
-  getClientDataById,
-  getInvoiceDataByUserId,
-} from '../../../../utils/dataFetch';
+  getClientById,
+  getClientInvoices,
+} from '../../../../service/client.service';
 import IClient from '../../../../interfaces/clients';
 import DisplayInvoiceList from '../../../../components/displayInvoiceList';
 import Link from 'next/link';
@@ -12,10 +12,12 @@ import Link from 'next/link';
 //this params is from the route(the folder name--invoice/[id])
 export default async function FetchInvoice({ params }: { params: Params }) {
   const id = params.id;
-  const data: IClient = await getClientDataById(id);
+  const data: IClient = await getClientById(id);
+  console.log(data);
+
   const myclient = data;
 
-  const invoices = await getInvoiceDataByUserId(myclient._id);
+  const invoices = await getClientInvoices(myclient._id);
 
   return (
     <>

@@ -26,9 +26,5 @@ export default async function handler(
         console.log(e);
         res.status(400).json(req.body);
       }
-      break;
-    case 'DELETE':
-      try {
-      } catch (e) {}
   }
 }

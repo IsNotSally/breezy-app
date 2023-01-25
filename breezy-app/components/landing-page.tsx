@@ -5,10 +5,9 @@ import styles from '../styles/landing-page.module.css';
 import Image from 'next/image';
 import logo from '../public/Black logo - no background.png';
 import { BsArrowRight } from 'react-icons/bs';
-import { getData, getInvoiceDataById } from '../utils/dataFetch';
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { getInvoiceByPoNumber } from '../service/invoice.service';
 
 export default function LandingPage() {
   const router = useRouter();
@@ -18,7 +17,7 @@ export default function LandingPage() {
 
   async function handleSubmit(e: any) {
     e.preventDefault();
-    const invoice = await getInvoiceDataById(inputValue);
+    const invoice = await getInvoiceByPoNumber(inputValue);
     if (!invoice.error) {
       router.push(`/pay-invoice/${inputValue}`);
     } else {

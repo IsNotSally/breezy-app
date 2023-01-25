@@ -1,10 +1,10 @@
 import React from 'react';
 import DisplayClients from '../../../components/displayClients';
 import IClient from '../../../interfaces/clients';
-import { getClientData, getData } from '../../../utils/dataFetch';
+import { getClients } from '../../../service/client.service';
 
 export default async function FetchClients() {
-  const client: IClient[] = await getClientData();
+  const client: IClient[] = await getClients();
 
   return (
     <>

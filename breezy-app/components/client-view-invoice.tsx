@@ -8,8 +8,8 @@ import Logo from '../public/Black logo - no background.png';
 import { ChakraProvider } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Button, ButtonGroup } from '@chakra-ui/react';
-import { updateData } from '../utils/dataFetch';
 import IInvoice from '../interfaces/invoice';
+import { updateInvoice } from '../service/invoice.service';
 
 type Props = {
   invoice: IInvoice;
@@ -27,7 +27,10 @@ export default function ClientViewInvoice({
   const [invoiceStatus, setInvoiceStatus] = useState(invoice.paid);
 
   const updateStatus = async (invoice: IInvoice) => {
-    const newInvoiceStatus = await updateData(invoice._id.toString(), invoice);
+    const newInvoiceStatus = await updateInvoice(
+      invoice._id.toString(),
+      invoice
+    );
     setInvoiceStatus(newInvoiceStatus.paid);
   };
 

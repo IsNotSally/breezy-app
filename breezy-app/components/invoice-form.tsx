@@ -2,8 +2,7 @@
 
 import { useState } from 'react';
 import '../components/invoice-form.css';
-import { createClient, submitData } from '../utils/dataFetch';
-import Link from 'next/link';
+import { createClient } from '../service/client.service';
 import React from 'react';
 import {
   FormControl,
@@ -13,6 +12,7 @@ import {
 } from '@chakra-ui/react';
 import IInvoice from '../interfaces/invoice';
 import IClient from '../interfaces/clients';
+import { createInvoice } from '../service/invoice.service';
 
 function InvoiceForm({ existingClient }: { existingClient: string }) {
   const [fullName, setFullName] = useState('');
@@ -33,7 +33,7 @@ function InvoiceForm({ existingClient }: { existingClient: string }) {
   };
 
   const pushInvoice = async (invoice: IInvoice) => {
-    const newInvoice = await submitData(invoice);
+    const newInvoice = await createInvoice(invoice);
   };
 
   async function handleSubmit(event: any) {

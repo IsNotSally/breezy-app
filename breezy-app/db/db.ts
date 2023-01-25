@@ -1,9 +1,7 @@
 import mongoose from 'mongoose';
+import { env } from 'process';
 
-const dbUrl = 'mongodb://127.0.0.1:27017/breezy-app';
-
-// mongoose.set('', true);
-mongoose.connect(dbUrl);
+mongoose.connect(env.DBURL!);
 
 const db = mongoose.connection;
 

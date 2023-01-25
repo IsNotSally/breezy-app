@@ -1,4 +1,3 @@
-import connectMongo from '../../../utils/connectMongo';
 import Invoice from '../../../models/invoice';
 import { NextApiRequest, NextApiResponse } from 'next/types';
 
@@ -24,15 +23,6 @@ export default async function handler(
       } catch (e) {
         console.log(e);
         res.status(400).json(req.body);
-      }
-      break;
-    case 'DELETE':
-      try {
-        const invoice = await Invoice.findByIdAndDelete(req.query.id);
-        res.status(201).json(invoice);
-      } catch (e) {
-        console.log(e);
-        res.status(400).json('Error!');
       }
   }
 }
